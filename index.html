@@ -1,1 +1,403 @@
 index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOBAL BANK ACCOUNT - Demo</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #071225;
+  color: #f4f7ff;
+  min-height: 100vh;
+}
+
+header {
+  background: #101f39;
+  padding: 22px;
+  border-bottom: 1px solid #263958;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #65c9ff;
+}
+
+.demo {
+  background: #503d13;
+  color: #ffdf83;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.container {
+  max-width: 1050px;
+  margin: 35px auto;
+  padding: 15px;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.muted {
+  color: #9eacc3;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.balance {
+  margin-top: 25px;
+  background: linear-gradient(135deg,#104d79,#087da0);
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.balance h3 {
+  font-size: 14px;
+  color: #d5edff;
+}
+
+.amount {
+  font-size: 38px;
+  font-weight: bold;
+  margin: 15px 0;
+  overflow-wrap: anywhere;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.card {
+  background: #101f39;
+  border: 1px solid #263958;
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  font-size: 17px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 9px;
+  border: 1px solid #344968;
+  background: #071225;
+  color: white;
+  outline: none;
+}
+
+input:focus {
+  border-color: #65c9ff;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-radius: 9px;
+  background: #087eae;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #079bcf;
+}
+
+.secondary {
+  background: #243a58;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #263958;
+  font-size: 13px;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.success {
+  color: #52df9a;
+}
+
+.pending {
+  color: #ffc75e;
+}
+
+.review {
+  color: #ff9c8e;
+}
+
+.notice {
+  margin-top: 22px;
+  padding: 15px;
+  border: 1px solid #725c28;
+  border-radius: 10px;
+  color: #ffdf83;
+  background: #302817;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  color: #8292aa;
+  font-size: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">GLOBAL BANK ACCOUNT</div>
+  <div class="demo">DEMO ACCOUNT · NOT A REAL BANK</div>
+</header>
+
+<main class="container">
+
+<section id="welcome">
+  <h1>Welcome to Global Banking</h1>
+  <p class="muted">
+    Explore a simulated banking dashboard and test
+    sample transfers using fictional demo funds.
+  </p>
+
+  <div class="card" style="margin-top:25px">
+    <h3>Demo Access</h3>
+    <p class="muted">
+      No real login credentials are required.
+      This demonstration does not collect passwords.
+    </p>
+    <button onclick="openDashboard()">
+      Enter Demo Dashboard
+    </button>
+  </div>
+</section>
+
+<section id="dashboard" class="hidden">
+
+  <h1>Account Dashboard</h1>
+  <p class="muted">
+    Welcome to your simulated account.
+  </p>
+
+  <div class="balance">
+    <h3>DEMO ACCOUNT BALANCE</h3>
+    <div class="amount" id="balance">$750,000.00</div>
+    <p class="muted">Fictional demonstration funds · USD</p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Account Information</h3>
+      <p class="muted">Account holder: Demo Customer</p>
+      <p class="muted">Account type: Demo Checking</p>
+      <p class="muted">Currency: USD</p>
+      <p class="muted">Account status: Simulation</p>
+    </div>
+
+    <div class="card">
+      <h3>Make a Demo Transfer</h3>
+
+      <input id="recipient"
+        type="text"
+        placeholder="Recipient name">
+
+      <input id="amount"
+        type="number"
+        min="1"
+        placeholder="Amount in USD">
+
+      <button onclick="transfer()">
+        Simulate Transfer
+      </button>
+
+      <p class="muted" style="margin-top:12px">
+        No money is sent or received.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-top:22px">
+    <h3>Transaction History</h3>
+    <div id="history">
+      <p class="muted">No demo transactions yet.</p>
+    </div>
+  </div>
+
+  <div class="notice">
+    DEMONSTRATION ONLY: All balances, account details
+    and transaction statuses on this page are fictional.
+    A pending or successful status is only a simulated
+    result and does not represent a real bank transaction.
+  </div>
+
+  <button class="secondary"
+    onclick="closeDashboard()">
+    Exit Demo
+  </button>
+
+</section>
+
+</main>
+
+<footer>
+  GLOBAL BANK ACCOUNT · Educational Banking Simulation
+  <br><br>
+  Not a licensed financial institution. No real banking
+  services or money transfers are provided.
+</footer>
+
+<script>
+
+let balance = 750000;
+
+function openDashboard() {
+  document.getElementById("welcome").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+}
+
+function closeDashboard() {
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("welcome").classList.remove("hidden");
+}
+
+function updateBalance() {
+  document.getElementById("balance").textContent =
+    "$" + balance.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+}
+
+function transfer() {
+
+  const recipient =
+    document.getElementById("recipient").value.trim();
+
+  const amount =
+    Number(document.getElementById("amount").value);
+
+  if (!recipient) {
+    alert("Please enter a demo recipient name.");
+    return;
+  }
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    alert("Please enter a valid demo amount.");
+    return;
+  }
+
+  if (amount > balance) {
+    alert("Insufficient demo balance.");
+    return;
+  }
+
+  let status;
+  let statusClass;
+
+  if (amount >= 50000) {
+    status = "PENDING (SIMULATED)";
+    statusClass = "pending";
+  } else if (amount <= 40000) {
+    status = "SUCCESSFUL (SIMULATED)";
+    statusClass = "success";
+  } else {
+    status = "UNDER REVIEW (SIMULATED)";
+    statusClass = "review";
+  }
+
+  const history = document.getElementById("history");
+
+  if (history.querySelector(".muted")) {
+    history.innerHTML = "";
+  }
+
+  const item = document.createElement("div");
+  item.className = "transaction";
+
+  const details = document.createElement("div");
+  const name = document.createElement("strong");
+  name.textContent = recipient;
+
+  const date = document.createElement("p");
+  date.className = "muted";
+  date.textContent = new Date().toLocaleString();
+
+  details.append(name, date);
+
+  const result = document.createElement("div");
+  result.style.textAlign = "right";
+
+  const value = document.createElement("strong");
+  value.textContent = "-$" + amount.toLocaleString("en-US");
+
+  const state = document.createElement("p");
+  state.className = "status " + statusClass;
+  state.textContent = status;
+
+  result.append(value, state);
+  item.append(details, result);
+
+  history.prepend(item);
+
+  document.getElementById("recipient").value = "";
+  document.getElementById("amount").value = "";
+
+  alert(
+    "Demo transfer created.\n\n" +
+    "Recipient: " + recipient + "\n" +
+    "Amount: $" + amount.toLocaleString("en-US") +
+    "\nStatus: " + status +
+    "\n\nNo real funds were transferred."
+  );
+}
+
+</script>
+
+</body>
+  </html>
+  
